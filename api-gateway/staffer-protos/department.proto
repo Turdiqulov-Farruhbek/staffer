@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package staff;
+
+option go_package = "genprotos/";
+
+import "void.proto";
+
+
+
+service DepartmentService {
+  rpc Create(DepartmentCreateReq) returns (DepartmentRes);
+  rpc GetByID(Byid) returns (DepartmentRes);
+  rpc Update(DepartmentUpdateReq) returns (DepartmentRes);
+  rpc Delete(Byid) returns (Void);
+  rpc GetAll(DepartmentGetAllReq) returns (DepartmentGetAllRes);
+};
+
+message DepartmentRes {
+  string id = 1;
+  string name = 2;
+  string company_id = 3;
+};
+
+message DepartmentUpdateReq{
+  string id = 1;
+  string name = 2;
+  string company_id = 3;
+}
+
+message DepartmentCreateReq {
+  string name = 1;
+  string company_id = 2;
+};
+
+message DepartmentGetAllReq {
+  string name = 1;
+  string company_id = 2;
+  Pagination filter = 3;
+};
+
+message DepartmentGetByIdRes{
+  DepartmentRes department = 1;
+}
+
+message DepartmentGetAllRes {
+  repeated DepartmentRes departments = 1;
+  bool success = 2;
+};

@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package staff;
+
+option go_package = "genprotos/";
+
+import "void.proto";
+
+
+service JobService {
+  rpc Create(JobApplicationCreate) returns (Void);
+  rpc Get(Byid) returns (JobApplitcationGetRes);
+  rpc Update(JobApplicationUpdate) returns (Void);
+  rpc Delete(Byid) returns (Void);
+  rpc GetAll(JobApplicationGetAll) returns (JobApplicationGetAllRes);
+};
+
+message JobApplicationCreate {
+  string candidate_id = 1;
+  string vacancy_id = 2;
+  string resume_id = 3;
+  string status = 4;
+};
+
+message JobApplitcationGetRes {
+  string id = 1;
+  string candidate_id = 2;
+  string vacancy_id = 3;
+  string resume_id = 4;
+  string status = 5;
+};
+
+message JobApplicationUpdate {
+  string id = 1;
+  string resume_id = 4;
+  string status = 5;
+};
+
+message JobApplicationGetAll {
+  string candidate_id = 1;
+  string vacancy_id = 2;
+  string resume_id = 3;
+  string status = 4;
+  Pagination filter = 5;
+};
+
+message JobApplicationGetAllRes {
+  JobApplitcationGetRes JobApplications = 1;
+  bool success = 2;
+};

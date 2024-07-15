@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package staff;
+
+option go_package = "genprotos/";
+
+
+message Void {
+    bool success = 1;
+    string message = 2;
+};
+
+message Byid{
+    string id = 1;
+}
+
+message Pagination {
+    int64 limit = 1;
+    int64 offset = 2; 
+}

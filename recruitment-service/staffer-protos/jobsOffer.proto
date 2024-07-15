@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package staff;
+
+option go_package = "genprotos/";
+
+// Xizmat interfeysi
+service JobOfferService {
+    rpc CreateJobOffer(CreateJobOfferRequest) returns (JobOfferResponse);
+    rpc GetByIdJobOffer(GetByIdJobOfferRequest) returns (JobOfferResponse);
+    rpc GetAllJobOffers(GetAllJobOffersRequest) returns (JobOffersResponse);
+    rpc UpdateJobOffer(UpdateJobOfferRequest) returns (JobOfferResponse);
+    rpc DeleteJobOffer(DeleteJobOfferRequest) returns (JobOfferResponse);
+}
+
+// JobOffer modelini ta'riflash
+message JobOffer {
+    string id = 1;
+    string title = 2;
+    string description = 3;
+    string company = 4;
+    string location = 5;
+    string status = 6; // e.g., "active", "closed"
+}
+
+// Yaratish uchun so'rov
+message CreateJobOfferRequest {
+    JobOffer job_offer = 1;
+}
+
+// ID bo'yicha so'rov
+message GetByIdJobOfferRequest {
+    string id = 1;
+}
+
+// Barcha ish takliflarini olish uchun so'rov
+message GetAllJobOffersRequest {}
+
+// Taklifni yangilash uchun so'rov
+message UpdateJobOfferRequest {
+    string id = 1;
+    JobOffer job_offer = 2;
+}
+
+// Taklifni o'chirish uchun so'rov
+message DeleteJobOfferRequest {
+    string id = 1;
+}
+
+// Javoblar
+message JobOfferResponse {
+    JobOffer job_offer = 1;
+}
+
+message JobOffersResponse {
+    repeated JobOffer job_offers = 1;
+}
+

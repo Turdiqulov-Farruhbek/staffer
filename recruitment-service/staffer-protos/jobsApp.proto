@@ -1,0 +1,96 @@
+syntax = "proto3";
+
+package staff;
+
+option go_package = "genprotos/";
+
+import "void.proto";
+
+service RecruitmentService {
+    rpc CreateJobApplication(CreateJobApplicationRequest) returns (JobApplicationResponse);
+    rpc CreateJobStep(CreateJobStepRequest) returns (JobStepResponse);
+    rpc UpdateJobStep(UpdateJobStepRequest) returns (JobStepResponse);
+    rpc UpdateJobApplication(UpdateJobApplicationRequest) returns (JobApplicationResponse);
+    rpc GetJobApplicationById(GetJobApplicationByIdRequest) returns (JobApplicationResponse);
+    rpc GetJobStepById(GetJobStepByIdRequest) returns (JobStepResponse);
+    rpc GetAllJobApplications(GetJobApplicationsRequest) returns (JobApplicationsResponse);
+    rpc DeleteJobApplication(DeleteJobApplicationRequest) returns (JobApplicationResponse);
+    rpc DeleteJobStep(DeleteJobStepRequest) returns (JobStepResponse);
+  }
+
+message JobApplication {
+  string id = 1;
+  string applicant_name = 2;
+  string position = 3;
+  string status = 4;
+  repeated JobStep steps = 5;
+}
+
+message JobStep {
+  string id = 1;
+  string application_id = 2;
+  string description = 3;
+  string status = 4;
+}
+
+message CreateJobApplicationRequest {
+  string applicant_name = 1;
+  string position = 2;
+  repeated JobStep steps = 3;
+}
+
+message CreateJobStepRequest {
+  string application_id = 1;
+  string description = 2;
+  string status = 3;
+}
+
+message UpdateJobStepRequest {
+  string step_id = 1;
+  string description = 2;
+  string status = 3;
+}
+
+message UpdateJobApplicationRequest {
+  string id = 1;
+  string status = 2;
+}
+
+message GetJobApplicationByIdRequest {
+  string id = 1;
+}
+
+message GetJobStepByIdRequest {
+  string application_id = 1;
+}
+
+message GetJobApplicationsRequest {
+		string CandidateId = 1;
+		string VacancyId = 2;
+		string ResumeId = 3;
+		string Status = 4;
+		Pagination Pagination = 5;
+}
+
+message DeleteJobApplicationRequest {
+  string id = 1;
+}
+
+message DeleteJobStepRequest {
+  string application_id = 1;
+  string step_id = 2;
+}
+
+message JobApplicationResponse {
+  JobApplication job_application = 1;
+}
+
+message JobStepResponse {
+  JobStep job_step = 1;
+}
+
+message JobApplicationsResponse {
+  repeated JobApplication job_applications = 1;
+}
+
+

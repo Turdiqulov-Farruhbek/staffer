@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package staff;
+
+option go_package = "genprotos/";
+
+import "void.proto";
+
+
+service CompanyService {
+  rpc Create(CreateCompany) returns (Void);
+  rpc GetAll(GetAllCompanyRequest) returns (GetAllCompanyResponse);
+  rpc Update(CompanyUpdate) returns (Void);
+  rpc Delete(Byid) returns (Void);
+  rpc GetById(Byid) returns (GetByID);
+}
+
+message CreateCompany {
+    string name = 1;
+    string address = 2;
+    string industry = 3;
+    string website = 4;
+  }
+
+message CompanyUpdate{
+  string id = 1;
+  string name = 2;
+  string address = 3;
+  string industry = 4;
+  string website = 5;
+}
+
+message GetAllCompanyRequest{
+  string name = 1;
+  string address = 2;
+  string industry = 3;
+  string website = 4;
+  string company_id =5;
+  Pagination filter=6;
+}
+
+message GetAllCompanyResponse{
+  repeated GetAllCompanyRequest Companies =1;
+  bool success = 2;
+}
+
+message GetByID {
+  string name = 1;
+  string address = 2;
+  string industry = 3;
+  string website = 4;
+  string company_id =5;
+  bool success =6;
+}

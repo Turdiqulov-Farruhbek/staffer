@@ -1,0 +1,73 @@
+syntax = "proto3";
+
+package staff;
+
+option go_package = "genprotos/";
+
+import "void.proto";
+
+service VacancyService {
+  rpc Create(VacancyCreate) returns (Void);
+  rpc GetByID(Byid) returns (VacancyGetResUpdateReq);
+  rpc Update(VacancyGetResUpdateReq) returns (Void);
+  rpc Delete(Byid) returns (Void);
+  rpc GetAll(VacancyGetAllReq) returns (VacancyGetAllRes);
+  rpc GetApplications(Byid) returns (VacancyApplicationsRes);
+  rpc GetOffers(Byid) returns (VacancyOffersRes);
+}
+
+message VacancyCreate {
+  string title = 1;
+  string description = 2;
+  string department_id = 3;
+  string position_id = 4;
+  string status = 5;
+}
+
+message VacancyGetResUpdateReq {
+  string id = 1; 
+  string title = 2;
+  string description = 3;
+  string department_id = 4;
+  string position_id = 5;
+  string status = 6;
+}
+
+message VacancyGetAllReq {
+  string title = 1;
+  string description = 2;
+  string department_id = 3;
+  string position_id = 4;
+  string status = 5;
+  Pagination Pagination = 6;
+}
+
+message VacancyGetAllRes {
+  repeated VacancyGetResUpdateReq vacancies = 1;
+  bool success = 2;
+}
+
+message VacancyApplicationsRes {
+  repeated Application applications = 1;
+  bool success = 2;
+}
+
+message VacancyOffersRes {
+  repeated Offer offers = 1;
+  bool success = 2;
+}
+
+
+message Application {
+  string id = 1;
+  string candidate_name = 2;
+  string resume = 3;
+  string status = 4;
+}
+
+message Offer {
+  string id = 1;
+  string candidate_name = 2;
+  string position = 3;
+  string status = 4;
+}

@@ -1,0 +1,78 @@
+syntax = "proto3";
+
+package staff;
+
+option go_package = "genprotos/";
+
+import "void.proto";
+
+
+service AuthService {
+  rpc Register(CreateUser) returns (UserResponse);
+  rpc Login(LoginRequest) returns (LoginResponse);
+  rpc Update(UpdateUser) returns (Void);
+  rpc UpdateForAdmin(UpdateUserForAdmin) returns (Void);
+  rpc Logout(LogoutRequest) returns (Void);
+  rpc RefreshToken(RefreshTokenRequest) returns (RefreshTokenResponse);
+};
+
+message CreateUser {
+  string name = 1;
+  string email = 2;
+  string password = 3;
+  string position_id = 4;
+  float rating = 5;
+  string role = 6;
+  string token = 7;
+  string exp=8;
+};
+message UserResponse{
+    bool success = 1;
+    string message = 2;
+    string access_token = 3;
+    string refresh_token = 4; 
+};
+
+message LoginRequest{
+    string name = 1;
+    string email = 2;
+    string password = 3;
+};
+
+message UpdateUser {
+    string id = 1;
+    string name = 2;
+    string email = 3;
+    string password = 4;
+};
+
+
+message UpdateUserForAdmin{
+    string id =1;
+    string position_id = 2;
+    string role = 3;
+};
+
+message LogoutRequest {
+    string email = 1;
+    string password = 2;
+};
+
+message RefreshTokenRequest{
+    string token = 1;
+};
+
+message RefreshTokenResponse {
+    bool success = 1;
+    string message = 2;
+    string token = 3;
+};
+
+message LoginResponse {
+    bool success = 1;
+    string message = 2;
+    string access_token = 3;
+    string refresh_token = 4;
+    string role =5;
+
+}
